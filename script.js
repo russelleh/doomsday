@@ -1,26 +1,33 @@
-$(document).ready(function() {
-  Y_U = bigInt("10e100");
-  M_Y = bigInt("31536000000");
-  P_M = bigInt("1.855e40");
+document.addEventListener("DOMContentLoaded", function(event) {
+  years_per_universe      = bigInt("10e100");
+  milliseconds_per_year   = bigInt("3.1536e10");
+  plancks_per_millisecond = bigInt("1.855e40");
 
-  M_U = M_Y.multiply(Y_U)
+  milliseconds_per_universe = milliseconds_per_year.multiply(years_per_universe);
 
   setInterval(function() {
-    time = document.getElementById("time");
-    now  = bigInt(Date.now())
-    down = M_U.minus(now)
-    plan = down.multiply(P_M);
-    ts   = plan.toString(2);
+    now_ms       = bigInt(Date.now());
+    remaining_ms = milliseconds_per_universe.minus(now_ms);
+    remaining_p  = plancks_per_millisecond.multiply(remaining_ms);
 
-    ts = ts.slice(0, -37);
-    for (i = 0; i < 37; i++) {
-      r = Math.floor(Math.random() * 2);
-      ts = ts + r;
+    // last 38 chars are zeros, should be random
+    remaining_p_fuzzy = remaining_p.toString().split('');
+    for (i = 0; i < 38; i++) {
+      remaining_p_fuzzy[151 - i] = Math.floor(Math.random() * 10);
     }
-    ts = ts.replace(/(.)/g, "$1 ")
-    ts = ts.replace(/0/g, "○")
-    ts = ts.replace(/1/g, "●")
+    remaining_p_fuzzy = bigInt(remaining_p_fuzzy.join(''));
 
-    time.innerHTML = ts;
-  }, 16)
+    remaining_p_fuzzy_binary = remaining_p_fuzzy.toString(2);
+    while (remaining_p_fuzzy_binary.length < 506) {
+      remaining_p_fuzzy_binary = '0' + remaining_p_fuzzy_binary;
+    }
+
+    remaining_p_fuzzy_binary = remaining_p_fuzzy_binary.replace(/(.{23})/g, "$1\n")
+    remaining_p_fuzzy_binary = remaining_p_fuzzy_binary.replace(/(.)/g, "$1 ")
+
+    remaining_p_fuzzy_binary = remaining_p_fuzzy_binary.replace(/0/g, " ")
+    remaining_p_fuzzy_binary = remaining_p_fuzzy_binary.replace(/1/g, "●")
+
+    document.getElementById("time").innerHTML = remaining_p_fuzzy_binary;
+  }, 16);
 });
