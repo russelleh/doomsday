@@ -1,3 +1,5 @@
+const bigInt = require("./BigInteger.min.js")
+
 document.addEventListener("DOMContentLoaded", function(event) {
   years_per_universe      = bigInt("10e100");
   milliseconds_per_year   = bigInt("3.1536e10");
