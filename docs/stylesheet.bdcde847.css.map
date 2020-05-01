@@ -1,0 +1,1 @@
+{"version":3,"sources":["stylesheet.css"],"names":[],"mappings":"AAAA,KACE,eAAiB,CACjB,UACF,CAEA,MACE,iBAAkB,CAClB,cACF","file":"stylesheet.bdcde847.css","sourceRoot":"..","sourcesContent":["body {\n  background: black;\n  color:      white;\n}\n\n#time {\n  text-align: center;\n  margin-top: 4em;\n}\n"]}
