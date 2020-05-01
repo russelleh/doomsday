@@ -1,4 +1,4 @@
-const bigInt = require("./BigInteger.min.js")
+const bigInt = require("big-integer")
 
 document.addEventListener("DOMContentLoaded", function(event) {
   years_per_universe      = bigInt("10e100");
